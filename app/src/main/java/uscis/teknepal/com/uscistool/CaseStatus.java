@@ -1,5 +1,7 @@
 package uscis.teknepal.com.uscistool;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.GregorianCalendar;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -79,6 +82,8 @@ public class CaseStatus extends AppCompatActivity {
 
         receiptTextView.setText(savedReceipt);
 
+        setAlarm();
+
         //zzz mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -88,7 +93,8 @@ public class CaseStatus extends AppCompatActivity {
             public void onClick(View view) {
                // Button status = (Button) findViewById(R.id.button);
                 TextView receiptTextView = (TextView) findViewById(R.id.txtcase_id);
-                TextView body = (TextView) findViewById(R.id.txtresult_body);
+               // TextView body = (TextView) findViewById(R.id.txtresult_body);
+                TextView stat = (TextView) findViewById(R.id.txtresult_body);
                 receipt = receiptTextView.getText().toString();
 
                 //save the receipt number on a file. this way the number can be available to all of your app.
@@ -96,7 +102,6 @@ public class CaseStatus extends AppCompatActivity {
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putString("receipt",receipt);
                 editor.apply();
-
                 try  {
                     InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
@@ -107,11 +112,10 @@ public class CaseStatus extends AppCompatActivity {
                     if ((receipt != null)) {
                         checkStatus();
                     } else {
-                        TextView stat = (TextView) findViewById(R.id.txtresult_body);
+
                         stat.setText(R.string.emptyrecipt);
                     }
                 } else {
-                    TextView stat = (TextView) findViewById(R.id.txtresult_body);
                     stat.setText(R.string.emptyrecipt);
                 }
             }
@@ -119,6 +123,7 @@ public class CaseStatus extends AppCompatActivity {
     }
 
     private void checkStatus() {
+
         try {
             networkThread.submit(new Runnable() {
                 @Override
@@ -146,5 +151,12 @@ public class CaseStatus extends AppCompatActivity {
         return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
     }
 
+    public void setAlarm() {
+        GregorianCalendar cal = new GregorianCalendar();
+        Intent alertIntent = new Intent(this, AlertReceiver.class);
 
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),
+                PendingIntent.getBroadcast(CaseStatus.this, 1, alertIntent, PendingIntent.FLAG_UPDATE_CURRENT));
+    }
 }

@@ -15,4 +15,8 @@
     <string name="check_status">Check Status</string>
     <string name="preference_file_key">preference_file_key</string>
     <string name="receipt">receipt</string>
+    <string name="final_score">Final Score:</string>
+    <string name="better_luck">Better Luck Next Time</string>
+    <string name="good_luck">Good Work</string>
+    <string name="score">Your Score:</string>
 </resources>

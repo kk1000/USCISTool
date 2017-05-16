@@ -7,33 +7,6 @@ package uscis.teknepal.com.uscistool;
 class Question {
 
         private String mQuestions [];
-
-    {
-        mQuestions = new String[]{
-                        "If both the President and the Vice President can no longer serve, who becomes President?",
-                        "If the President can no longer serve, who becomes President?",
-                        "What is the Constitution?",
-                        "What is an amendment?",
-                        "What do we call the  1st ten amendments to the Constitution?",
-                        "How many amendments does the Constitution have?",
-                        "What is freedom of religion?",
-                        "What is the economic system in the United States?",
-                        "What is the “rule of law”?",
-                        "Name one branch or part of the government.",
-                        "What stops one branch of government from becoming too powerful?",
-                        "Who is in charge of the executive branch?",
-                        "Who makes federal laws?",
-                        "What are the two parts of the U.S. Congress?",
-                        "How many U.S. Senators are there?",
-                        "We elect a U.S. Senator for how many years?",
-                        "The House of Representatives has how many voting members?",
-                        "We elect a U.S. Representative for how many years?",
-                        "Who does a U.S. Senator represent?",
-                        "We elect a President for how many years?",
-                        "In what month do we vote for President?"
-                };
-    }
-
     private String mCorrectAnswers[] = {
                         "The Speaker of the House",
                         "The Vice President",
@@ -57,8 +30,6 @@ class Question {
                         "four (4)",
                         "November"
                 };
-
-
     private String mChoices [][] = {
                 {
                         "The Speaker of the House",
@@ -181,16 +152,38 @@ class Question {
                         "ten (10)"
                 },
                 {
-                        "Janaury",
+                        "January",
                         "March",
                         "December",
                         "November"
                 }
     };
 
-
-
-
+    {
+        mQuestions = new String[]{
+                        "If both the President and the Vice President can no longer serve, who becomes President?",
+                        "If the President can no longer serve, who becomes President?",
+                        "What is the Constitution?",
+                        "What is an amendment?",
+                        "What do we call the  1st ten amendments to the Constitution?",
+                        "How many amendments does the Constitution have?",
+                        "What is freedom of religion?",
+                        "What is the economic system in the United States?",
+                        "What is the “rule of law”?",
+                        "Name one branch or part of the government.",
+                        "What stops one branch of government from becoming too powerful?",
+                        "Who is in charge of the executive branch?",
+                        "Who makes federal laws?",
+                        "What are the two parts of the U.S. Congress?",
+                        "How many U.S. Senators are there?",
+                        "We elect a U.S. Senator for how many years?",
+                        "The House of Representatives has how many voting members?",
+                        "We elect a U.S. Representative for how many years?",
+                        "Who does a U.S. Senator represent?",
+                        "We elect a President for how many years?",
+                        "In what month do we vote for President?"
+                };
+    }
 
     String getQuestion(int a) {
         return mQuestions[a];
@@ -222,6 +215,9 @@ class Question {
             return mCorrectAnswers[a];
         }
 
+        int getCount(){
+            return mQuestions.length;
+        }
 
 }
 
